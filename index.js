@@ -327,7 +327,7 @@ function decodeString(str) {
 
 function tryParse(p, str) {
   try {
-    var parseIsoDateToJsDate = function parseIsoDateToJsDate (key, value) => {
+    var parseIsoDateToJsDate = function parseIsoDateToJsDate (key, value) {
     	if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:[.,]\d+)?Z$/i.test(value)) {
 	    return new Date(value);
 	}
