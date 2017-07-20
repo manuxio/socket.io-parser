@@ -12,10 +12,12 @@
     "is-buffer.js"
   ],
   "dependencies": {
-    "debug": "~2.6.4",
+    "bson-objectid": "^1.1.5",
     "component-emitter": "1.2.1",
+    "debug": "~2.6.4",
     "has-binary2": "~1.0.2",
-    "isarray": "2.0.1"
+    "isarray": "2.0.1",
+    "moment": "^2.18.1"
   },
   "devDependencies": {
     "benchmark": "2.1.2",

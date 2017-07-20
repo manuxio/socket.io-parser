@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -8,7 +7,8 @@ var Emitter = require('component-emitter');
 var hasBin = require('has-binary2');
 var binary = require('./binary');
 var isBuf = require('./is-buffer');
-
+var ObjectId = require('bson-objectid');
+var moment = require('moment');
 /**
  * Protocol version.
  *
@@ -327,17 +327,30 @@ function decodeString(str) {
 
 function tryParse(p, str) {
   try {
+    var parseIsoDateOrObjectId = function parseIsoDateOrObjectId(key, value) {
+      if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:[.,]\d+)?Z$/i.test(value)) {
+        if (moment(value).isValid()) {
+          return new Date(value);
+        }
+      }
+      if (typeof value === 'string' && (value.length === 24)) {
+        if (ObjectId.isValid(value)) {
+          return ObjectId(value);
+        }
+      }
+    }
     var parseIsoDateToJsDate = function parseIsoDateToJsDate (key, value) {
     	if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:[.,]\d+)?Z$/i.test(value)) {
-	    return new Date(value);
-	}
+
+	       return new Date(value);
+      }
     	return value;
     };
     p.data = JSON.parse(str, parseIsoDateToJsDate);
   } catch(e){
     return error();
   }
-  return p; 
+  return p;
 }
 
 /**
