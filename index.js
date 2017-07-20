@@ -351,7 +351,7 @@ function tryParse(p, str) {
       }
     	return value;
     };
-    p.data = JSON.parse(str, parseIsoDateOrObjectId);
+    p.data = JSON.parse(str, parseIsoDateToJsDate);
   } catch(e){
     return error();
   }
