@@ -333,7 +333,7 @@ function tryParse(p, str) {
           return new Date(value);
         }
       }
-      if (typeof value === 'string' && (value.length === 24)) {
+      if (__SERVER__ && typeof value === 'string' && (value.length === 24)) {
         if (ObjectId.isValid(value)) {
           return ObjectId(value);
         }
