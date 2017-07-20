@@ -338,6 +338,8 @@ function tryParse(p, str) {
           return ObjectId(value);
         }
       }
+
+      return value;
     }
     var parseIsoDateToJsDate = function parseIsoDateToJsDate (key, value) {
     	if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:[.,]\d+)?Z$/i.test(value)) {
@@ -346,7 +348,7 @@ function tryParse(p, str) {
       }
     	return value;
     };
-    p.data = JSON.parse(str, parseIsoDateToJsDate);
+    p.data = JSON.parse(str, parseIsoDateOrObjectId);
   } catch(e){
     return error();
   }
